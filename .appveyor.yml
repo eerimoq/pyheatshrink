@@ -30,6 +30,12 @@ environment:
     - PYTHON: "C:\\Python310-x64"
       PYTHON_ARCH: "64"
 
+    - PYTHON: "C:\\Python311"
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "C:\\Python311-x64"
+      PYTHON_ARCH: "64"
+
 install:
   - SET PATH=%PYTHON%;%PATH%
   - python --version

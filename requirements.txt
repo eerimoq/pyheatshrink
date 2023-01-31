@@ -1,2 +1,2 @@
-cython==0.29.26
+cython==0.29.33
 pyfuzzer
