@@ -45,6 +45,7 @@ environment:
 install:
   - SET PATH=%PYTHON%;%PATH%
   - python --version
+  - python -m pip install setuptools==68.0.0
   - python -m pip install -r requirements.txt
 
 test_script:
