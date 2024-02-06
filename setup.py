@@ -31,7 +31,7 @@ heatshrink_module = Extension('heatshrink2.core',
                               ])
 
 if USE_CYTHON:
-    extensions = cythonize([heatshrink_module])
+    extensions = cythonize([heatshrink_module], compiler_directives={"language_level": "2"})
 else:
     extensions = [heatshrink_module]
 
