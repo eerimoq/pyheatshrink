@@ -83,7 +83,7 @@ class HeatshrinkFileTest(TestUtilsMixin, unittest.TestCase):
         data = io.BytesIO()
 
         for mode in ['a+', 'w+', 'ab', 'r+', 'U', 'x', 'xb']:
-            with self.assertRaisesRegexp(ValueError, '^Invalid mode: .*$'):
+            with self.assertRaisesRegex(ValueError, '^Invalid mode: .*$'):
                 HeatshrinkFile(data, mode=mode)
 
     def test_round_trip(self):
