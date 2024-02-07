@@ -36,9 +36,16 @@ environment:
     - PYTHON: "C:\\Python311-x64"
       PYTHON_ARCH: "64"
 
+    - PYTHON: "C:\\Python312"
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "C:\\Python312-x64"
+      PYTHON_ARCH: "64"
+
 install:
   - SET PATH=%PYTHON%;%PATH%
   - python --version
+  - python -m pip install setuptools==68.0.0
   - python -m pip install -r requirements.txt
 
 test_script:
