@@ -176,6 +176,8 @@ class HeatshrinkFile(io.BufferedIOBase):
         """
 
         self._fp = None
+        self._buffer = None
+        self._encoder = None
         # Should the file be closed by us?
         self._close_fp = False
         self._mode = _MODE_CLOSED
@@ -283,16 +285,21 @@ class HeatshrinkFile(io.BufferedIOBase):
 
         # Flush and finish the decoder.
         if self._mode == _MODE_READ:
-            self._buffer.close()
+            if self._buffer is not None:
+                self._buffer.close()
         elif self._mode == _MODE_WRITE:
-            self._fp.write(self._encoder.finish())
-            self._encoder = None
+            if self._encoder is not None:
+                data = self._encoder.finish()
+                self._encoder = None
+                if self._fp is not None:
+                    self._fp.write(data)
 
         try:
             # Actually close the internal file pointer.
             if self._close_fp:
                 self._fp.close()
         finally:
+            self._buffer = None
             self._fp = None
             self._close_fp = False
             self._mode = _MODE_CLOSED
