@@ -48,16 +48,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Used to host cibuildwheel
-      - uses: actions/setup-python@v4
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version: "3.11"
-
-      - name: Install cibuildwheel
-        run: python -m pip install cibuildwheel
+          enable-cache: false
 
       - name: Build wheels
-        run: python -m cibuildwheel --output-dir wheelhouse
+        run: uvx --from cibuildwheel@3.3.1 cibuildwheel --output-dir wheelhouse
         env:
           CIBW_ARCHS: ${{ matrix.architectures || 'auto' }}
 
@@ -72,12 +69,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v4
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version: "3.11"
+          enable-cache: false
 
       - name: Build sdist
-        run: pipx run build --sdist
+        run: uv build --sdist
 
       - uses: actions/upload-artifact@v4
         with:
