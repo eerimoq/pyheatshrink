@@ -59,7 +59,7 @@ jobs:
           enable-cache: false
 
       - name: Build wheels
-        run: uvx --from cibuildwheel@3.3.1 cibuildwheel --output-dir wheelhouse
+        run: uvx --from cibuildwheel@4.3.4 cibuildwheel --output-dir wheelhouse
         env:
           CIBW_ARCHS: ${{ matrix.architectures || 'auto' }}
 
